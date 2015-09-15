@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:sfdc="http://www.mulesoft.org/schema/mule/sfdc" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" version="EE-3.7.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/sfdc http://www.mulesoft.org/schema/mule/sfdc/current/mule-sfdc.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
+    <sfdc:config name="Salesforce__Basic_authentication" username="arunima.sh@hcl.com" password="Fosters60#" securityToken="paApOB6LzlROSTwyZIShvc6l" proxyHost="10.97.32.18" proxyPort="8080" doc:name="Salesforce: Basic authentication"/>
+    <data-mapper:config name="JSON_To_List_Lead_" transformationGraphPath="json_to_list_lead_.grf" doc:name="JSON_To_List_Lead_"/>
+    <batch:job name="batchprocessingBatch" max-failed-records="111">
+        <batch:input>
+            <file:inbound-endpoint path="C:\Users\arunima.sh\Desktop\NewBatch" responseTimeout="10000" doc:name="File"/>
+            <data-mapper:transform config-ref="JSON_To_List_Lead_" doc:name="JSON To List&lt;Lead&gt;"/>
+        </batch:input>
+        <batch:process-records>
+            <batch:step name="Batch_Step">
+                <batch:commit size="3" doc:name="Batch Commit">
+                    <sfdc:create config-ref="Salesforce__Basic_authentication" type="Lead" doc:name="Salesforce">
+                        <sfdc:objects ref="#[payload]"/>
+                    </sfdc:create>
+                </batch:commit>
+            </batch:step>
+        </batch:process-records>
+        <batch:on-complete>
+            <set-payload value="#[payload]" doc:name="Set Payload"/>
+            <logger message="#[payload]" level="INFO" doc:name="Logger"/>
+        </batch:on-complete>
+    </batch:job>
+</mule>
