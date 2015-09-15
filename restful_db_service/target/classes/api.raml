@@ -1,0 +1,108 @@
+#%RAML 0.8
+title: Stores
+version: 1.0
+baseUri: http://localhost:8082/
+
+schemas:
+  - StoreSchema: |
+      {
+        "$schema": "http://json-schema.org/draft-04/schema#",
+        "id": "http://jsonschema.net",
+        "type": "object",
+        "properties": {
+          "Records": {
+          "id": "http://jsonschema.net/Records",
+            "type": "array",
+            "items": [
+              {
+            "id": "http://jsonschema.net/Records",
+                "type": "object",
+                "properties": {
+                  "name": {"id": "http://jsonschema.net/Records","type": "string"},
+                  "country": {"id": "http://jsonschema.net/Records","type": "string"}
+                },
+                "required": [
+                  "name",
+                  "country"
+                ]
+              }
+            ]
+          }
+        },
+        "required": [
+          "Records"
+        ]
+      }
+resourceTypes:
+  - collection: 
+      get:
+        description: Get a list of Stores based on the parameter.
+        responses:
+          200:
+            body:
+              application/json:
+   
+      post:
+        description: Post a new Store details into a collection.
+        responses:
+          201:
+            headers:
+              location:
+                type: string
+                example: /StoreLocation
+            body:
+
+traits:
+  
+      
+  - FindStore:
+      description: Query parameters related Finding store 
+      queryParameters: 
+        name:
+          description: The  name of the  new Store.
+          type: string
+          example: Record1
+        country: 
+          description: The location of the new Store
+          type: string
+          example: India
+          
+/contacts:
+  type: collection
+  displayName: A Named Stream
+  description: Collection of Cotact details 
+  post:
+   
+    description: Create a new contact in salesforce.
+    body:
+      application/json:
+        schema: StoreSchema
+        example: |
+           { "Records": [
+                {
+                    "name": "Record1",
+                    "country": "USA"
+                },
+                {
+                    "name": "Record2",
+                    "country": "India"
+                }
+            ]}
+       
+  get:
+    is: [ FindStore ]
+    description: Get a list of contacts.
+    responses:
+      404:
+        description: The specified contact could not be found.
+      200:
+        description: Returns a list of conbtacts.
+        body:
+          application/json:
+            schema: StoreSchema
+            example : |
+               { "Records": [
+                {
+                    "name": "Record1",
+                    "country": "USA"
+                ]}
