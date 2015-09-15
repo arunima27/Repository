@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:mock="http://www.mulesoft.org/schema/mule/mock" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" version="EE-3.7.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:webservice.xml"/>
+    </spring:beans>
+    <munit:test name="webservice-test-suite-UnsecureServiceFlowTest" description="Test">
+        <component class="mcd.SOAPRequest.CreateSOAPRequest" doc:name="Java"/>
+        <flow-ref name="UnsecureServiceFlow" doc:name="Flow-ref to UnsecureServiceFlow"/>
+        <mock:verify-call messageProcessor="mule:Custom" doc:name="Verify Call" atLeast="1">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['Custom']"/>
+            </mock:with-attributes>
+        </mock:verify-call>
+    </munit:test>
+</mule>

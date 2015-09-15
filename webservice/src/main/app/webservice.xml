@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<mule xmlns:email="http://www.mulesoft.org/schema/mule/email" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:data-mapper="http://www.mulesoft.org/schema/mule/ee/data-mapper" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:dw="http://www.mulesoft.org/schema/mule/ee/dw" xmlns:json="http://www.mulesoft.org/schema/mule/json" xmlns:db="http://www.mulesoft.org/schema/mule/db" version="EE-3.7.0" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/json http://www.mulesoft.org/schema/mule/json/current/mule-json.xsd
+http://www.mulesoft.org/schema/mule/ee/dw http://www.mulesoft.org/schema/mule/ee/dw/current/dw.xsd
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd
+http://www.mulesoft.org/schema/mule/email http://www.mulesoft.org/schema/mule/email/current/mule-email.xsd
+http://www.mulesoft.org/schema/mule/ee/data-mapper http://www.mulesoft.org/schema/mule/ee/data-mapper/current/mule-data-mapper.xsd">
+   
+    <http:listener-config basePath="services" doc:name="HTTP Listener Configuration" host="0.0.0.0" name="HTTP_Listener_Configuration1" port="63081"/>
+    
+
+    <flow name="UnsecureServiceFlow">
+        <http:listener config-ref="HTTP_Listener_Configuration1" doc:name="HTTP Inbound Endpoint" path="unsecure"/>
+<!-- 		<http:inbound-endpoint address="http://localhost:63081/services/unsecure" doc:name="HTTP Inbound Endpoint" exchange-pattern="request-response"/> -->
+        <cxf:jaxws-service doc:name="Unsecure service" serviceClass="mcd.ws.McD_LogicalWS">
+            <cxf:inFaultInterceptors/>
+            <cxf:outFaultInterceptors/>
+        
+        </cxf:jaxws-service>
+        <component class="mcd.ws.McD_LogicalWS" doc:name="Ws Db Service"/>
+        <echo-component doc:name="Echo"/>
+        <logger message="Name is #[payload]" level="INFO" doc:name="Logger"/>
+        <custom-filter doc:name="Custom" class="mcd.validateRecord.ValidateRecord"/> 
+        <echo-component doc:name="Echo"/>
+    </flow>
+</mule>
