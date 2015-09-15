@@ -1,0 +1,134 @@
+<metadata__cache__entry>
+  <version>5.2.0.0</version>
+  <connectorName>Xml_getNameResponse__To_JSON</connectorName>
+  <metadataIo class="tree-map">
+    <entry>
+      <string>http://www.mulesoft.org/schema/mule/ee/data-mapper/transform</string>
+      <map>
+        <entry>
+          <string>__default__</string>
+          <org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
+            <input class="org.mule.common.metadata.DefaultMetaData">
+              <payload class="org.mule.common.metadata.DefaultXmlMetaDataModel">
+                <dataType>XML</dataType>
+                <metaDataModelPropertiesManager>
+                  <properties>
+                    <org.mule.common.metadata.property.TextBasedExampleMetaDataModelProperty/>
+                  </properties>
+                </metaDataModelPropertiesManager>
+                <fields>
+                  <org.mule.common.metadata.DefaultMetaDataField>
+                    <name>return</name>
+                    <model class="org.mule.common.metadata.DefaultSimpleMetaDataModel">
+                      <dataType>STRING</dataType>
+                      <metaDataModelPropertiesManager>
+                        <properties/>
+                      </metaDataModelPropertiesManager>
+                    </model>
+                    <accessType>READ_WRITE</accessType>
+                    <metaDataFieldPropertyManager>
+                      <properties>
+                        <org.mule.common.metadata.property.QNameMetaDataProperty>
+                          <name>
+                            <namespaceURI></namespaceURI>
+                            <localPart>return</localPart>
+                            <prefix></prefix>
+                          </name>
+                        </org.mule.common.metadata.property.QNameMetaDataProperty>
+                      </properties>
+                    </metaDataFieldPropertyManager>
+                  </org.mule.common.metadata.DefaultMetaDataField>
+                </fields>
+                <rootElement>
+                  <namespaceURI>http://publishconsume/</namespaceURI>
+                  <localPart>getNameResponse</localPart>
+                  <prefix></prefix>
+                </rootElement>
+                <schemas class="org.mule.common.metadata.StringBasedSchemaProvider">
+                  <schemas>
+                    <string>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&lt;xs:schema xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:ns1=&quot;http://schemas.xmlsoap.org/soap/http&quot; xmlns:soap=&quot;http://schemas.xmlsoap.org/wsdl/soap/&quot; xmlns:tns=&quot;http://publishconsume/&quot; xmlns:wsdl=&quot;http://schemas.xmlsoap.org/wsdl/&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; elementFormDefault=&quot;unqualified&quot; targetNamespace=&quot;http://publishconsume/&quot; version=&quot;1.0&quot;&gt;
+&lt;xs:element name=&quot;getCompany&quot; type=&quot;tns:getCompany&quot;/&gt;
+&lt;xs:element name=&quot;getCompanyResponse&quot; type=&quot;tns:getCompanyResponse&quot;/&gt;
+&lt;xs:element name=&quot;getName&quot; type=&quot;tns:getName&quot;/&gt;
+&lt;xs:element name=&quot;getNameResponse&quot; type=&quot;tns:getNameResponse&quot;/&gt;
+&lt;xs:element name=&quot;setCompany&quot; type=&quot;tns:setCompany&quot;/&gt;
+&lt;xs:element name=&quot;setCompanyResponse&quot; type=&quot;tns:setCompanyResponse&quot;/&gt;
+&lt;xs:element name=&quot;setName&quot; type=&quot;tns:setName&quot;/&gt;
+&lt;xs:element name=&quot;setNameResponse&quot; type=&quot;tns:setNameResponse&quot;/&gt;
+&lt;xs:complexType name=&quot;setCompany&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element minOccurs=&quot;0&quot; name=&quot;arg0&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;setCompanyResponse&quot;&gt;
+&lt;xs:sequence/&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;getCompany&quot;&gt;
+&lt;xs:sequence/&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;getCompanyResponse&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element minOccurs=&quot;0&quot; name=&quot;return&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;getName&quot;&gt;
+&lt;xs:sequence/&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;getNameResponse&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element minOccurs=&quot;0&quot; name=&quot;return&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;setName&quot;&gt;
+&lt;xs:sequence&gt;
+&lt;xs:element minOccurs=&quot;0&quot; name=&quot;arg0&quot; type=&quot;xs:string&quot;/&gt;
+&lt;/xs:sequence&gt;
+&lt;/xs:complexType&gt;
+&lt;xs:complexType name=&quot;setNameResponse&quot;&gt;
+&lt;xs:sequence/&gt;
+&lt;/xs:complexType&gt;
+&lt;/xs:schema&gt;</string>
+                  </schemas>
+                  <encoding>windows-1252</encoding>
+                  <baseUri>file:/D:/Mule_workspace/NewWksp/publishconsume/src/main/resources/TestWSDL.wsdl</baseUri>
+                </schemas>
+              </payload>
+              <properties>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>RECORD</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>SESSION</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>INBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>OUTBOUND</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+                <entry>
+                  <org.mule.common.metadata.MetaDataPropertyScope>FLOW</org.mule.common.metadata.MetaDataPropertyScope>
+                  <org.mule.common.metadata.MetaDataProperties>
+                    <fields/>
+                  </org.mule.common.metadata.MetaDataProperties>
+                </entry>
+              </properties>
+            </input>
+          </org.mule.tooling.metadata.cache.DefaultMetadataCacheEntry>
+        </entry>
+      </map>
+    </entry>
+  </metadataIo>
+</metadata__cache__entry>
