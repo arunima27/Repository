@@ -1,0 +1,32 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "id": "http://jsonschema.net",
+  "type": "object",
+  "properties": {
+    "Records": {
+         "id": "http://jsonschema.net/Records",
+      "type": "array",
+      "items": [
+        {
+                "id": "http://jsonschema.net/Records",
+          "type": "object",
+          "properties": {
+            "Company": {"id": "http://jsonschema.net/Records","type": "string"},
+            "FirstName": {"id": "http://jsonschema.net/Records","type": "string"},
+			 "LastName": {"id": "http://jsonschema.net/Records","type": "string"},
+			  "Email": {"id": "http://jsonschema.net/Records","type": "string"}
+          },
+          "required": [
+            "Company",
+            "FirstName",
+			"LastName",
+			"Email"
+          ]
+        }
+      ]
+    }
+  },
+  "required": [
+    "Records"
+  ]
+}

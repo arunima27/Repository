@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:munit="http://www.mulesoft.org/schema/mule/munit" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:ftpserver="http://www.mulesoft.org/schema/mule/ftpserver" xmlns:batch="http://www.mulesoft.org/schema/mule/batch" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:mock="http://www.mulesoft.org/schema/mule/mock" version="EE-3.7.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd
+http://www.mulesoft.org/schema/mule/ftpserver http://www.mulesoft.org/schema/mule/ftpserver/current/mule-ftpserver.xsd
+http://www.mulesoft.org/schema/mule/batch http://www.mulesoft.org/schema/mule/batch/current/mule-batch.xsd
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/mock http://www.mulesoft.org/schema/mule/mock/current/mule-mock.xsd">
+    <munit:config name="munit" doc:name="MUnit configuration"/>
+    <spring:beans>
+        <spring:import resource="classpath:fileprocessing.xml"/>
+    </spring:beans>
+    <ftpserver:config name="FTP_Server" doc:name="FTP Server"/>
+    <munit:test name="fileprocessing-test-suite-fileprocessingBatchTest" description="Test">
+        <mock:when messageProcessor="sfdc:create" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['Salesforce']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[{&quot;success&quot; : &quot;true&quot;,]"/>
+        </mock:when>
+        <component class="fileprocessing.TestData" doc:name="Java"/>
+        <batch:execute name="fileprocessingBatch" doc:name="Run Batch fileprocessingBatch"/>
+        <mock:verify-call messageProcessor="batch:job" doc:name="Verify Call">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['fileprocessingBatch']"/>
+            </mock:with-attributes>
+        </mock:verify-call>
+    </munit:test>
+    <munit:test name="fileprocessing-test-suite-fileprocessingBatchTest1" description="Test">
+        <mock:when messageProcessor="sfdc:create" doc:name="Mock">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['Salesforce']"/>
+            </mock:with-attributes>
+            <mock:then-return payload="#[]"/>
+        </mock:when>
+        <component class="fileprocessing.TestData" doc:name="Java"/>
+        <batch:execute name="fileprocessingBatch" doc:name="Run Batch fileprocessingBatch"/>
+        <mock:verify-call messageProcessor="batch:job" doc:name="Verify Call">
+            <mock:with-attributes>
+                <mock:with-attribute name="doc:name" whereValue="#['fileprocessingBatch']"/>
+            </mock:with-attributes>
+        </mock:verify-call>
+    </munit:test>
+</mule>

@@ -1,0 +1,31 @@
+{
+        "Records": [
+            {
+                "Company": "ABC",
+                "FirstName": "Arunima",
+				"LastName":"Sharma",
+				"Email":"ashar@mindtree.com"
+            },
+            {
+                 
+                "Company": "DEF",
+                "FirstName": "Aru",
+				"LastName":"Sharma",
+				"Email":"ashar@hcl.com"
+            },
+			{
+                 
+                "Company": "GHI",
+                "FirstName": "Aru",
+				"LastName":"Sharma",
+				"Email":"ashar@hcl.com"
+            },
+			{
+                 
+                "Company": "JKL",
+                "FirstName": "Aru",
+				"LastName":"Sharma",
+				"Email":"ashar@hcl.com"
+            }
+        ]
+}
